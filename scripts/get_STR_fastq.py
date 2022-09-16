@@ -70,11 +70,9 @@ def get_STR_fq_from_bam(args_list):
     COMMAND_merge = "{0} -fastq_mergepairs {1} -reverse {2} -fastqout {3}"
 
     os.system(COMMAND_samtools.format(mysamtools,bam_file,pos,STR_bam))
-    print("LLEGA")
     try:
         os.system(COMMAND_samtoolsReverse.format(mysamtools,STR_bam,STR_bam_rev))
         os.system(COMMAND_sort.format(mysamtools,STR_bam_rev,STR_bam_sort_rev))
-        print("LLEGA")
         os.system(COMMAND_bamToFastq.format(mysamtools,STR_bam_sort_rev,fq_rev_tmp))
 
         os.system(COMMAND_reverse.format(myseqtk,fq_rev_tmp,fq_rev))

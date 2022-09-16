@@ -276,16 +276,24 @@ def STR_search_one_locus(args_list):
             if N_line % 4 != 2:
                 pass
             else:
+                read_name = prev_line
                 myseq = line.strip()
                 res =STR_search(STR_Repeat_Motif,period,myseq,flank_seq_left,flank_seq_right)
                 if res == -1:
                     continue
                 else:
-                    (STR_result_pat_full,allele,rep_num,flank_mismatchs,distances) =res
-                    if rep_num<=1:
+                    (STR_result_pat_full,allele,rep_num,flank_mismatchs,distances,flank_left_region, flank_right_region) =res
+                    distance_5 = distances.split(",")[0]
+                    distance_3 = distances.split(",")[1]
+                    #####################
+                    ## NUM REPS
+                    #####################
+                    if rep_num<=0:
                         pass
                     else:
                         results.write(str(STR_result_pat_full)+"\t"+ str(allele) +"\t"+flank_mismatchs+ "\t"+distances+"\n")
+                        results_read_flanking.write(str(sample)+"\t"+str(STR_result_pat_full)+"\t"+str(allele)+"\t"+distance_5+"\t"+distance_3+"\t"+read_name+"\t"+str(flank_left_region[0])+"\t"+str(flank_left_region[1])+"\t"+str(flank_left_region[2])+"\t"+str(flank_right_region[0])+"\t"+str(flank_right_region[1])+"\t"+str(flank_right_region[2])+"\n")
+            prev_line = line.strip()
     results.close()
     print("{} has been decoded completely! ".format(marker_name))
 

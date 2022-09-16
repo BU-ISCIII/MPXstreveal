@@ -34,8 +34,8 @@ def get_STR_fq_from_bam(args_list):
     (1)Get STR bam forward stand and reverse stand bam from  bam file
     (2)then transfor to fastq file using bamToFastq
     (3)get the inverse complementary sequence from reverse fastq file
-    (4)combined forward and reverse stand fastq files 
-    
+    (4)combined forward and reverse strand fastq files
+
     '''
     sample,pos,marker_name,bam_file,result_dir,stand,mysamtools, mybamToFastq,myseqtk,myusearch,type,assemble_pairs= args_list
     COMMAND_index="{0} index -b {1}"
@@ -93,7 +93,7 @@ def check_bam_file(bam_file):
 
 
 def main(sample,bam_file,working_path,ref_bed,type,assemble_pairs,num_processors):
-    ## get path of linux tools 
+    ## get path of linux tools
     conf_path = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
     config = conf_parse(os.path.join(conf_path,"conf.py"))
     mysamtools=eval(config["mysamtools"])
@@ -103,7 +103,7 @@ def main(sample,bam_file,working_path,ref_bed,type,assemble_pairs,num_processors
 
     ## check Bam file
     check_bam_file(bam_file)
-    ## create STR fq dir 
+    ## create STR fq dir
     STR_fastq_dir=os.path.join(working_path,"STRfq")
     if not os.path.exists(STR_fastq_dir):
         os.makedirs(STR_fastq_dir)
@@ -129,9 +129,3 @@ def main(sample,bam_file,working_path,ref_bed,type,assemble_pairs,num_processors
 
 if __name__=='__main__':
     sys.exit(main(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5], sys.argv[6],sys.argv[7]))
-
-
-
-
-
-

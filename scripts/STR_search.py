@@ -260,11 +260,14 @@ def STR_search(STR_Repeat_Motif,period,seq,flank_seq_left,flank_seq_right):
         if sum(list(map(lambda a,b:a*b,repetitive_motifs,max_order_region_len))) ==0:
             return -1
         else:
-            return (STR_result_pat_full,allele,rep_num,flank_mismatchs,distances)
+            return (STR_result_pat_full,allele,rep_num,flank_mismatchs,distances,flank_left_region,flank_right_region)
 
 def STR_search_one_locus(args_list):
-    marker_name,STR_Repeat_Motif,period,STR_fastq_file,result_file,flank_seq_left,flank_seq_right= args_list
+    sample,marker_name,STR_Repeat_Motif,period,STR_fastq_file,result_file,flank_seq_left,flank_seq_right= args_list
     results = open(result_file,"w")
+    results_read_flanking_name = sample + "_" + marker_name + "_read_flanking_regions.txt"
+    results_read_flanking = open(results_read_flanking_name,"w")
+    results_read_flanking.write("sample"+"\t"+"str_pattern"+"\t"+"allele_number"+"\t"+"distance_5"+"\t"+"distance_3"+"\t"+"read_name"+"\t"+"flank_left_start"+"\t"+"flank_left_end"+"\t"+"flank_left_mistmatches"+"\t"+"flank_right_start"+"\t"+"flank_right_end"+"\t"+"flank_right_mistmatches"+"\n")
     results.write("STR_sequence_structure\tAllele\tFlank_mismatchs(5',3')\tDistance_to_reads_ends(5',3')\n")
     N_line = 0
     with open(STR_fastq_file,"r") as f1:

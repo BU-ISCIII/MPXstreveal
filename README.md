@@ -2,7 +2,7 @@
 
 ### Overview
 
- &emsp;  &emsp; Monkepox STR reveal (MPXstreveal) a new draft approach for detecting and curating low complexity regions in monkeypox genomes using massive parallel sequencing. STR search algorithm is based in the [STRsearch pipeline](https://github.com/AnJingwd/STRsearch) [[1]](https://hereditasjournal.biomedcentral.com/articles/10.1186/s41065-020-00120-6)
+ &emsp;  &emsp; Monkeypox STR reveal (MPXstreveal) a new draft approach for detecting and curating low complexity regions in monkeypox genomes using massive parallel sequencing. STR search algorithm is based in the [STRsearch pipeline](https://github.com/AnJingwd/STRsearch) [[1]](https://hereditasjournal.biomedcentral.com/articles/10.1186/s41065-020-00120-6)
 
 <!---
  TODO ### Algorithm description: 
@@ -266,9 +266,9 @@ docker run -v LOCAL_PATH/app/:/app/ -w /app/ -it anjing123/strsearch:latest from
 ```
 -->
 
-### Aknoledgements
+### Acknowledgements
 
-Thanks to the team that developped [STRsearch pipeline](https://github.com/AnJingwd/STRsearch) in which is based our code with slight modifications.
+Thanks to the team that developed [STRsearch pipeline](https://github.com/AnJingwd/STRsearch) in which is based our code with slight modifications.
 
 
 ### References

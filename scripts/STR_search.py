@@ -328,6 +328,8 @@ def main(working_path,sample,sex,fastq_dir,ref_bed,reads_threshold,num_processor
         chr = content_list[0]
         period = int(content_list[3])
         marker_name = content_list[5]
+        print("------MARKER NAME-----")
+        print(marker_name)
         STR_Repeat_Motif = content_list[7]
         stand = content_list[-3]
         flank_seq_left,flank_seq_right = content_list[-2],content_list[-1]
@@ -335,13 +337,15 @@ def main(working_path,sample,sex,fastq_dir,ref_bed,reads_threshold,num_processor
         result_file = os.path.join(STR_results_dir,marker_name+"_results_{}.txt".format(sample))
         if count_reads(STR_fastq_merge_file)<= int(reads_threshold): # if reads < 30 in fastq, the STR locus won't be genotyped , but create empty file
             os.system("touch {0}".format(result_file))
+            print("Not enough reads")
             print("{} has been decoded completely!".format(marker_name))
         else:
             if sex =="female" and chr == "chrY":
+                print("weird sex thing")
                 os.system("touch {0}".format(result_file))
                 print("{} has been decoded completely!".format(marker_name))
             else:
-                info_list.append([marker_name,STR_Repeat_Motif,period,STR_fastq_merge_file,result_file,flank_seq_left,flank_seq_right])
+                info_list.append([sample,marker_name,STR_Repeat_Motif,period,STR_fastq_merge_file,result_file,flank_seq_left,flank_seq_right])
         N+=1
     bed.close()
 

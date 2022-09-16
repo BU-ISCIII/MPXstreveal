@@ -49,23 +49,23 @@ def STR_nomenclature_trans(period,STR_Repeat_Motif):
 def find_lcseque(seq,STR_unit):
     '''
      seach STR unit in reads a sequence using Longest common subsequence algorithm
-     input: 
+     input:
            seq: a sequence
            STR_unit: the sequence of a STR unit
     output:
             local_max_list：local max score list
-            p_list: position list   
+            p_list: position list
     '''
     m  = np.zeros([len(seq) + 1,len(STR_unit) + 1])
-    local_max = 0  
-    p = 0  
+    local_max = 0
+    p = 0
     local_max_list = []
     p_list = []
     for i in range(len(seq)):
         for j in range(len(STR_unit)):
             if seq[i] == STR_unit[j]:
                 m[i + 1][j + 1] = m[i][j] + 1
-                if m[i + 1][j + 1] == len(STR_unit): 
+                if m[i + 1][j + 1] == len(STR_unit):
                     mmax = m[i + 1][j + 1]
                     p = i + 1
                     local_max_list.append(int(mmax))
@@ -89,6 +89,7 @@ def match_flank(seq,flank):
         for j, k in zip(seq[index:index + length], flank):  # [(s1[0],s2[0]),(s1[1],s2[1]),...]
             if j != k:
                 missmatch += 1
+
         if missmatch <= resultMissmatchCount:
             seqdict[missmatch] = seq[index:index + length]
             resultMissmatchCount = missmatch
@@ -115,7 +116,7 @@ def merge_intervals(intervals):
 def get_STR_unit_region(score_list,pos_list,start_point = 0):
     '''
     Compute the intervals of STR unit and union
-    input: 
+    input:
     output:
     '''
     intervals_list = []
@@ -128,7 +129,7 @@ def get_STR_unit_region(score_list,pos_list,start_point = 0):
     elif score_list[0]==2:  ## when a unit is part of other unit ,don’t merge intervals
         return intervals_list
     else:
-        intervals_union = merge_intervals(intervals_list)  ## get union intervals of STR units 
+        intervals_union = merge_intervals(intervals_list)  ## get union intervals of STR units
         return intervals_union
 
 def list_depth(items):
@@ -197,18 +198,27 @@ def get_STR_seq(max_order_region, STR_units_upper,repetitive_motifs,STR_numbers,
 
     max_order_region_len = [max_order_region[i+1]- max_order_region[i] for i in range(0,len(max_order_region),2)]
     max_order_region_len_sub = max_order_region_len[start_index:end_index+1]
-    
+
     STR_units_sub = STR_units_upper[start_index:end_index+1]
     STR_units_sub_len = [len(j) for j in STR_units_sub]
-    
+
     repetitive_motifs_sub  = repetitive_motifs[start_index:end_index+1]
     STR_numbers_sub = STR_numbers[start_index:end_index+1]
-    
+
     STR_unit_rep_count = np.array(max_order_region_len_sub)/np.array(STR_units_sub_len)*np.array(STR_numbers_sub)
     STR_unit_rep_count_new = [int(STR_unit_rep_count[i]) if repetitive_motifs_sub[i]==1 else STR_unit_rep_count[i] for i in range(len(repetitive_motifs_sub))]
-    
+
     rep_num = sum(STR_unit_rep_count_new)
     STR_to_flank_distance = len(seq[flank_left_region[1]:mySTR_start]) + len(seq[mySTR_end:flank_right_region[0]])
+#    if(flank_left_region[2] < 3) and flank_right_region[2] < 3 and flank_left_region[1] < flank_right_region[0]:
+#        print("mystr_start and end")
+#        print(mySTR_start)
+#        print(mySTR_end)
+#        print("flank regions")
+#        print(flank_left_region)
+#        print(flank_right_region)
+#        print("STR_to_flank_distance")
+#        print(STR_to_flank_distance)
     allele_sum = rep_num+(STR_to_flank_distance)//period+(STR_to_flank_distance)%period*0.1
     allele = int(allele_sum) if (allele_sum-int(allele_sum))<0.1 else allele_sum
 
@@ -233,7 +243,6 @@ def get_STR_seq(max_order_region, STR_units_upper,repetitive_motifs,STR_numbers,
 def STR_search(STR_Repeat_Motif,period,seq,flank_seq_left,flank_seq_right):
     flank_left_region,flank_right_region = match_flank(seq,flank_seq_left),match_flank(seq,flank_seq_right)
     STR_units_upper, repetitive_motifs,STR_numbers= STR_nomenclature_trans(period,STR_Repeat_Motif)
-
     region_list_all = []
     for STR_unit in STR_units_upper:
         (local_max_score_list,p_list_left)  = find_lcseque(seq,STR_unit)

@@ -1,14 +1,16 @@
+# MPXstreveal
+
 ### Overview
 
- &emsp;  &emsp; STRsearch is an end-to-end pipeline for targeted profiling of short tandem repeats (STRs) in massively parallel sequencing data. It is implemented using Python, supporting both version Python2 and Python3. 
+ &emsp;  &emsp; Monkepox STR reveal (MPXstreveal) a new draft approach for detecting and curating low complexity regions in monkeypox genomes using massive parallel sequencing. STR search algorithm is based in the [STRsearch pipeline](https://github.com/AnJingwd/STRsearch) [[1]](https://hereditasjournal.biomedcentral.com/articles/10.1186/s41065-020-00120-6)
 
- ### Algorithm description: 
+<!---
+ TODO ### Algorithm description: 
 
  &emsp;  &emsp; Briefly, STRsearch employs an iterative algorithm to obtain the longest continuous interval composed by all motifs of STR sequence structure without a priori assumptions on allele size. The actual STR region is determined by comparing the position of repeat patterns with the best matching location of flanking sequences in reads. Ultimately, allele size is calculated not only for repeat patterns, but also indels that are actually in the STR region.  
 
 
-
-### Installation
+TODO ### Installation
 
 To obtain STRsearch, use:
 
@@ -22,9 +24,7 @@ or
 wget https://github.com/AnJingwd/STRsearch/archive/master.zip
 ```
 
-
-
-### Prerequisite
+TODO ### Prerequisite
 
  &emsp;  &emsp; The following linux utilities are needed and the full path of  them on your  local machine  should be provided in conf.py file
 
@@ -42,7 +42,7 @@ Additionally, the following Python modules are required.
 
 
 
-### Configuration file format:
+TODO ### Configuration file format:
 
  &emsp;  &emsp; The first step for  STR analysis with STRsearch is to create a configuration file with your custom set of STR loci. One way to do this is by referring to the most up-to-date revised forensic STR sequence guide  and a worksheet can be downloaded from [link](https://strider.online/bundles/strbaseclient/downloads/Forensic_STR_Sequence_Structure_Guide_v5.xlsx). You will need to make a configuration file with the following columns present: 
 
@@ -72,11 +72,11 @@ Note some columns are not used. You can put any value in the non-required column
 
 
 
-### Inputs
+TODO ### Inputs
 
 FASTQ file or BAM-file from singe-end or paird-end sequencing platforms
 
-### Output
+TODO ### Output
 
 - genotypes.txt: genotypes on each targeted locus
 
@@ -85,8 +85,7 @@ FASTQ file or BAM-file from singe-end or paird-end sequencing platforms
 - qc_matrix.txt:  a quality control matrix including several sequence properties (total bases, sequencing quality score, number of allocated reads, distance distribution of STR repeat sequence to end of reads, allele read depth)  
 
 
-
-### Usage examples
+TODO ### Usage examples
 
 **1. run with  default parameters**
 
@@ -169,7 +168,7 @@ from_bam \
 
 
 
-### Options
+TODO ### Options
 
 **Default parameters**
 
@@ -215,7 +214,7 @@ from_bam \
 
 
 
-### Run with Docker
+TODO ### Run with Docker
 
 To obtain STRsearch Docker image, use:
 
@@ -265,18 +264,21 @@ docker run -v LOCAL_PATH/app/:/app/ -w /app/ -it anjing123/strsearch:latest from
 --multiple_alleles /app/test_results/test_multiple_alleles.txt \
 --qc_matrix /app/test_results/test_qc_matrix.txt
 ```
+-->
+
+### Aknoledgements
+
+Thanks to the team that developped [STRsearch pipeline](https://github.com/AnJingwd/STRsearch) in which is based our code with slight modifications.
 
 
+### References
 
+1. [Wang, D., Tao, R., Li, Z. et al. STRsearch: a new pipeline for targeted profiling of short tandem repeats in massively parallel sequencing data. Hereditas 157, 8 (2020). https://doi.org/10.1186/s41065-020-00120-6](https://hereditasjournal.biomedcentral.com/articles/10.1186/s41065-020-00120-6)
 
+<!---
+TODO ### Contact
 
-### Reference
-
- The STRsearch publication is available here:  [STRsearch: a new pipeline for targeted profiling of short tandem repeats in massively parallel sequencing data](https://hereditasjournal.biomedcentral.com/articles/10.1186/s41065-020-00120-6)
-
-
-
-### Contact
-
-Developer:  Dong Wang
-
+Sara Monzón 
+Sarai Varona
+Isabel Cuesta
+-->

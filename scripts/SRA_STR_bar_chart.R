@@ -75,6 +75,6 @@ for (n in 1:length(columns_list)) {
   STR_id <- unlist(strsplit(x = columns_name, split = '\\.'))[1]
   file_name <- paste(STR_id, "_SRA.svg", sep = "")
   xlabel <- paste("Number of ", paste(STR_id, " repeats", sep = ""), sep = "")
-  plot_title <- paste("Distribution of ", paste(STR_id, " repeats in SRA publicly available Nanopre Sequencing data", sep = ""), sep = "")
+  plot_title <- paste("Distribution of ", paste(STR_id, " repeats in SRA publicly available Nanopore Sequencing data", sep = ""), sep = "")
   create_svg_plot(file_name, columns_name, xlabel, plot_title)
 }

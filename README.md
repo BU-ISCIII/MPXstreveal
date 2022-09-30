@@ -266,6 +266,8 @@ docker run -v LOCAL_PATH/app/:/app/ -w /app/ -it anjing123/strsearch:latest from
 ```
 -->
 
+** This repo is a work in progress that woul soon be updated**
+
 ### Acknowledgements
 
 Thanks to the team that developed [STRsearch pipeline](https://github.com/AnJingwd/STRsearch) in which is based our code with slight modifications.

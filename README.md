@@ -266,7 +266,7 @@ docker run -v LOCAL_PATH/app/:/app/ -w /app/ -it anjing123/strsearch:latest from
 ```
 -->
 
-** This repo is a work in progress that woul soon be updated**
+**This repo is a work in progress that woul soon be updated**
 
 ### Acknowledgements
 

@@ -83,14 +83,8 @@ def create_dict_multifa (merged_fastq, flanking_regions, number_flanking, mismat
                                             str_seq_dict[str_pattern].update(new_sequence)
                                 else:
                                     print("Reverse read:")
-                                    print(read_name+'\t'+flank_left_start+'\t'+flank_left_end+'\t'+flank_right_start+'\t'+flank_right_end)
-                                    print(header)
-                                    print(sequence)
-                                    print(sequence[int(flank_right_start):int(flank_left_end)])
                             read = []
 
-    #         else: #TODO
-    #             print("Solo un flanking")
     return(str_seq_dict)
 
 def calculate_total_suppport(str_seq_dict,all_support):
@@ -115,7 +109,7 @@ def create_long_table(str_seq_dict,out_long):
     for str_id in str_seq_dict:
         for sequence in str_seq_dict[str_id]:
             oline=str_seq_dict[str_id][sequence]['sample_name']+'\t'+str_seq_dict[str_id][sequence]['str_mark']+'\t'+str_id+'\t'+str(str_seq_dict[str_id][sequence]['num_reps'])+'\t'+str(str_seq_dict[str_id][sequence]['supporting_reads'])+'\t'+str(str_seq_dict[str_id][sequence]['allele_frequency'])+'\t'+sequence+'\n'
-            lout.write(oline)
+            lout.write(out_line)
 
 def main(args=None):
     args = parse_args(args)
@@ -123,6 +117,7 @@ def main(args=None):
     str_seq_dict={}
     initial_dict=create_dict_multifa(args.merged_fastq, args.flanking_regions, args.number_flanking, args.mismatches, args.out_fasta, str_seq_dict, str_mark)
     all_support=0
+    out_line=""
     all_support=calculate_total_suppport(initial_dict,all_support)
     final_dict=calculate_frequency(initial_dict,all_support)
     create_long_table(final_dict,args.out_long)

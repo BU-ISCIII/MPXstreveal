@@ -103,12 +103,13 @@ def calculate_frequency(str_seq_dict,all_support):
     return(str_seq_dict)
 
 def create_long_table(str_seq_dict,out_long):
+    out_line=""
     lout = open(out_long, "w")
     header="Sample_name\tSTR_mark\tSTR_structure\tNumer_reps\tSupporting_reads\tAlleleFrequency\tSequence\n"
     lout.write(header)
     for str_id in str_seq_dict:
         for sequence in str_seq_dict[str_id]:
-            oline=str_seq_dict[str_id][sequence]['sample_name']+'\t'+str_seq_dict[str_id][sequence]['str_mark']+'\t'+str_id+'\t'+str(str_seq_dict[str_id][sequence]['num_reps'])+'\t'+str(str_seq_dict[str_id][sequence]['supporting_reads'])+'\t'+str(str_seq_dict[str_id][sequence]['allele_frequency'])+'\t'+sequence+'\n'
+            ou_line=str_seq_dict[str_id][sequence]['sample_name']+'\t'+str_seq_dict[str_id][sequence]['str_mark']+'\t'+str_id+'\t'+str(str_seq_dict[str_id][sequence]['num_reps'])+'\t'+str(str_seq_dict[str_id][sequence]['supporting_reads'])+'\t'+str(str_seq_dict[str_id][sequence]['allele_frequency'])+'\t'+sequence+'\n'
             lout.write(out_line)
 
 def main(args=None):
@@ -117,7 +118,6 @@ def main(args=None):
     str_seq_dict={}
     initial_dict=create_dict_multifa(args.merged_fastq, args.flanking_regions, args.number_flanking, args.mismatches, args.out_fasta, str_seq_dict, str_mark)
     all_support=0
-    out_line=""
     all_support=calculate_total_suppport(initial_dict,all_support)
     final_dict=calculate_frequency(initial_dict,all_support)
     create_long_table(final_dict,args.out_long)
